@@ -54,13 +54,13 @@ Run these in parallel where possible, based on bug type.
 
 **Search for similar/duplicate bugs:**
 ```bash
-bmo-search-cli similar {bug_id} --limit 10
+bmo-search similar {bug_id} --limit 10
 ```
 
 If the similar bugs look relevant, fetch a few to check if this is a known issue
 or has been attempted before:
 ```bash
-bmo-search-cli get {related_bug_id}
+bmo-search get {related_bug_id}
 ```
 
 **Find relevant implementation code:**
@@ -197,13 +197,13 @@ Produce this markdown document:
 
 ## Tools reference
 
-### bmo-search-cli
+### bmo-search
 ```bash
-bmo-search-cli search "terms" [--product P] [--component C] [--status open|closed|all] [--severity S1,S2] [--keywords K] [--crash-signature SIG] [--comments] [--limit N]
-bmo-search-cli similar BUG_ID [--limit N]
-bmo-search-cli duplicates BUG_ID
-bmo-search-cli get BUG_ID [--comments] [--history]
-bmo-search-cli advanced -f "field:op:value" [-f ...] [--or] [--limit N]
+bmo-search search "terms" [--product P] [--component C] [--status open|closed|all] [--severity S1,S2] [--keywords K] [--crash-signature SIG] [--comments] [--limit N]
+bmo-search similar BUG_ID [--limit N]
+bmo-search duplicates BUG_ID
+bmo-search get BUG_ID [--comments] [--history]
+bmo-search advanced -f "field:op:value" [-f ...] [--or] [--limit N]
 ```
 
 ### socorro-cli
