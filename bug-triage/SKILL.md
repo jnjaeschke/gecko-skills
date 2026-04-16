@@ -1,6 +1,6 @@
 ---
 name: bug-triage
-description: Semi-automatic bug triage. Enriches a Bugzilla bug with context (similar bugs, code pointers, spec situation, crash data), assesses severity/difficulty, and produces a concise markdown summary for an engineer to pick up.
+description: Automatic bug triage. Enriches a Bugzilla bug with context (similar bugs, code pointers, spec situation, crash data), assesses severity/difficulty, and produces a concise markdown summary for an engineer to pick up.
 argument-hint: "<bug-number>"
 ---
 
@@ -8,12 +8,11 @@ argument-hint: "<bug-number>"
 
 **Bug**: $0
 
-You are conducting a supervised bug triage. Your goal is to enrich a bug with
-context so that it can be efficiently triaged and picked up by an engineer. You
-produce a concise markdown document suitable for pasting as a bug comment.
+You are conducting a fully automatic bug triage. Your goal is to enrich a bug
+with context so that it can be efficiently triaged and picked up by an engineer.
+You produce a concise markdown document suitable for pasting as a bug comment.
 
-This is a supervised workflow. After each phase, present your findings and ask
-the engineer before proceeding to the next phase. The engineer may redirect you
+Run all phases without stopping for confirmation. The engineer may redirect you
 at any point.
 
 ## Important principles
@@ -43,8 +42,7 @@ at any point.
      specific website is involved
    - **performance**: Slow, janky, high memory usage
    - **other**: Test failures, build issues, infrastructure, etc.
-4. Present the classification and a clean summary. Ask the engineer to confirm
-   before proceeding.
+4. Note the classification and proceed immediately to Phase 1.
 
 ## Phase 1: Context Gathering
 
@@ -99,12 +97,12 @@ socorro-cli crash-pings --signature "CRASH_SIGNATURE" --days 7 --facet version
 
 ### If webcompat bug:
 
-Suggest to the engineer that you can hand off to `/webcompat-investigate` for
-full reproduction with Firefox/Chrome comparison. If the engineer prefers a
-quick check, use the firefox-devtools MCP to:
+Use the firefox-devtools MCP to do a quick check:
 1. Navigate to the URL
 2. Take a screenshot
 3. Check console errors
+
+Note: for deeper reproduction with Firefox/Chrome comparison, `/webcompat-investigate` is available.
 
 ## Phase 2: Analysis
 
@@ -122,12 +120,11 @@ Present the gathered context, then analyze:
    Which versions/platforms are affected? Is there an obvious cause from the
    stack trace?
 
-Present the analysis and ask the engineer for their assessment before finalizing.
+Proceed immediately to Phase 3.
 
 ## Phase 3: Assessment & Output
 
-Based on the analysis, produce the final triage document. Ask the engineer to
-confirm the severity recommendation.
+Based on the analysis, produce the final triage document.
 
 ### Severity guidelines
 
